@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Larawater\Authenticate\Infra\Middleware\Authenticate;
 use Larawater\Register\Infra\Controller\UserRegisterController;
 use Larawater\Access\Infra\Controller\UserAccessController;
 
@@ -16,6 +17,7 @@ use Larawater\Access\Infra\Controller\UserAccessController;
 */
 
 Route::prefix('v1')->group(function () {
+
   /**
    * 200 - {}
    * 500 - {"status": "Error"}
@@ -27,4 +29,11 @@ Route::prefix('v1')->group(function () {
    * 500 - {"status": "Error"}
    */
   Route::post('/access', UserAccessController::class);
+
+  /**
+   * 401 - {"status": "Unauthorized"}
+   */
+  Route::middleware(Authenticate::class)->group(function () {
+    // ...
+  });
 });
