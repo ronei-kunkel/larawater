@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Larawater\Register\Infra\Controller\UserRegisterController;
+use Larawater\Access\Infra\Controller\UserAccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,15 @@ use Larawater\Register\Infra\Controller\UserRegisterController;
 */
 
 Route::prefix('v1')->group(function () {
-  Route::post('/register', UserRegisterController::class); // 200 or 500 with body '"status": "Error"'
-  Route::post('/access', UserAccessController::class); // 200 or 500 with body '"status": "Error"'
+  /**
+   * 200 - {}
+   * 500 - {"status": "Error"}
+   */
+  Route::post('/register', UserRegisterController::class);
+
+  /**
+   * 200 - {"status": "Authenticated"}
+   * 500 - {"status": "Error"}
+   */
+  Route::post('/access', UserAccessController::class);
 });
