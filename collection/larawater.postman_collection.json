@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "ced337ad-6b2c-433c-96b1-e0298cc2e618",
+		"name": "Larawater",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26110165"
+	},
+	"item": [
+		{
+			"name": "UserRegister",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"xpto name\",\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/v1/register",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserAccess",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "localhost/api/v1/access",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"access"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserDrink",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authentication",
+						"value": "Authenticated",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"quantity\": 1\n}"
+				},
+				"url": {
+					"raw": "localhost/api/v1/user/1/drink",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"1",
+						"drink"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
