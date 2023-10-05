@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Larawater\Authenticate\Infra\Middleware\Authenticate;
+use Larawater\Drink\Infra\Controller\UserDrinkController;
 use Larawater\Register\Infra\Controller\UserRegisterController;
 use Larawater\Access\Infra\Controller\UserAccessController;
 
@@ -34,6 +35,19 @@ Route::prefix('v1')->group(function () {
    * 401 - {"status": "Unauthorized"}
    */
   Route::middleware(Authenticate::class)->group(function () {
-    // ...
+
+    /**
+     * 200 - {
+     *   "status": "Drinked",
+     *   "user": {
+     *       "id": 1,
+     *       "name": "xpto name",
+     *       "drink_counter": :counter
+     *     }
+     *   }
+     *
+     * 500 - {"status": "Error"}
+     */
+    Route::post('/user/{id}/drink', UserDrinkController::class);
   });
 });
