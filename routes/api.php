@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Larawater\Auth\Infra\Middleware\Auth;
-use Larawater\Drink\Infra\Controller\UserDrinkController;
-use Larawater\Register\Infra\Controller\UserRegisterController;
-use Larawater\Access\Infra\Controller\UserAccessController;
+use Larawater\Common\Infra\Middleware\AuthMiddleware;
+use Larawater\Module\Access\Infra\Controller\UserAccessController;
+use Larawater\Module\Drink\Infra\Controller\UserDrinkController;
+use Larawater\Module\Register\Infra\Controller\UserRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Route::prefix('v1')->group(function () {
    */
   Route::post('/access', UserAccessController::class);
 
-  Route::middleware(Auth::class)->group(function () {
+  Route::middleware(AuthMiddleware::class)->group(function () {
 
     /**
      * 200 - {
