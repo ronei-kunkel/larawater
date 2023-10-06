@@ -93,8 +93,8 @@
 						"type": "text"
 					},
 					{
-						"key": "Authentication",
-						"value": "Authenticated",
+						"key": "Authorization",
+						"value": "",
 						"type": "text"
 					}
 				],
@@ -103,15 +103,13 @@
 					"raw": "{\n    \"quantity\": 1\n}"
 				},
 				"url": {
-					"raw": "localhost/api/v1/user/1/drink",
+					"raw": "localhost/api/v1/drink",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"api",
 						"v1",
-						"user",
-						"1",
 						"drink"
 					]
 				}
