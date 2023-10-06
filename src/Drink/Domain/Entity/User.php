@@ -28,6 +28,6 @@ final class User
 
   public function drink(int $drinks = 1): void
   {
-    $this->drinkCounter += $drinks;
+    if ($drinks > 0) $this->drinkCounter += $drinks;
   }
 }
