@@ -24,9 +24,8 @@ final class UserAccessController
 
     $output = $this->action->handle($input);
 
-    $message = $output ? ['status' => 'Authenticated'] : ['status' => 'Error'];
-    $status  = $output ? 200 : 500;
+    if(!$output) return response()->json(['error' => 'Wrong credentials'], 401);
 
-    return response()->json($message, $status);
+    return response()->json(['token' => $output->token], 200);
   }
 }

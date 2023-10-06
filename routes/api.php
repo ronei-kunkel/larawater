@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Larawater\Authenticate\Infra\Middleware\Authenticate;
+use Larawater\Auth\Infra\Middleware\Auth;
 use Larawater\Drink\Infra\Controller\UserDrinkController;
 use Larawater\Register\Infra\Controller\UserRegisterController;
 use Larawater\Access\Infra\Controller\UserAccessController;
@@ -26,28 +26,28 @@ Route::prefix('v1')->group(function () {
   Route::post('/register', UserRegisterController::class);
 
   /**
-   * 200 - {"status": "Authenticated"}
-   * 500 - {"status": "Error"}
+   * 200 - {"token": :jwt}
+   * 401 - {"error": "Wrong credentials"}
    */
   Route::post('/access', UserAccessController::class);
 
-  /**
-   * 401 - {"status": "Unauthorized"}
-   */
-  Route::middleware(Authenticate::class)->group(function () {
+  Route::middleware(Auth::class)->group(function () {
 
     /**
      * 200 - {
-     *   "status": "Drinked",
      *   "user": {
-     *       "id": 1,
-     *       "name": "xpto name",
+     *       "id": :id,
+     *       "name": :name,
      *       "drink_counter": :counter
      *     }
      *   }
+     * 
+     * 400 - {"error": "Missing 'Authorization' header"}
+     *
+     * 401 - {"error": "Invalid token"}
      *
      * 500 - {"status": "Error"}
      */
-    Route::post('/user/{id}/drink', UserDrinkController::class);
+    Route::post('/drink', UserDrinkController::class);
   });
 });
