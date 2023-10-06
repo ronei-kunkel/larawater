@@ -16,23 +16,20 @@ final class UserDrinkController
   ) {
   }
 
-  public function __invoke(int $userId): Response
+  public function __invoke(): Response
   {
+    $data = $this->request->all();
+
     $message = ['status' => 'Error'];
     $status  = 500;
 
-    if (!isset($userId) or !is_numeric($userId)) return response()->json($message, $status);
-
-    $data = $this->request->all();
-
-    $input = new UserDrinkInput($userId, $data['quantity'] ?? 1);
+    $input = new UserDrinkInput($data['user']['id'], $data['quantity'] ?? 1);
 
     $output = $this->action->handle($input);
 
     if (!$output) return response()->json($message, $status);
 
     $message = [
-      'status' => 'Drinked',
       'user'   => [
         'id'            => $output->id(),
         'name'          => $output->name(),

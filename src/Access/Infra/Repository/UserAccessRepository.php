@@ -14,13 +14,13 @@ final class UserAccessRepository
     try {
 
       $userData = DB::selectOne(
-        'SELECT email, password FROM user WHERE email = :email',
+        'SELECT id, email, password FROM user WHERE email = :email',
         [
           'email' => $email->value()
         ]
       );
 
-      return ($userData) ? new User($email, $userData->password) : false;
+      return ($userData) ? new User($userData->id, $email, $userData->password) : false;
     } catch (Throwable $th) {
       return null;
     }
