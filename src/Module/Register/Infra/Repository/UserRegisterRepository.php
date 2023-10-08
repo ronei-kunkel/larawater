@@ -2,6 +2,7 @@
 
 namespace Larawater\Module\Register\Infra\Repository;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Larawater\Module\Register\Domain\Entity\User;
 use Throwable;
@@ -10,8 +11,8 @@ final class UserRegisterRepository
 {
   public function create(User $user): bool
   {
-    try {
-      DB::transaction(function () use ($user) {
+
+    return DB::transaction(function () use ($user) {
         DB::insert(
           'INSERT INTO user SET name = :name, email = :email, password = :password',
           [
@@ -21,10 +22,5 @@ final class UserRegisterRepository
           ]
         );
       });
-
-      return true;
-    } catch (Throwable $th) {
-      return false;
-    }
   }
 }
