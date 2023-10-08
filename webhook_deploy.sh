@@ -1,11 +1,9 @@
 #!/bin/bash
 
 while true; do
-  request=""
-  { 
-    # Check if the request is not null and then log it
-    if [[ -n "$request" ]]; then
-      echo -e "Request:\n$request"
-    fi 
-  } | nc -l -p 9991 -q 1
+  # Listen for incoming connections on port 9991
+  { echo -ne "HTTP/1.1 200 OK\r\n\r\n"; } | nc -l -p 9991 -q 1
+
+  # Run the deploy.sh script
+  ./deploy.sh
 done
