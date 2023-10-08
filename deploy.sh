@@ -10,17 +10,17 @@ git pull origin deploy
 docker build -t larawater .
 
 # para o container que está atualmente rodando com a penúltima versão do projeto
-if [[ $(docker ps -q -f name=larawater-app) ]]; then
+if $(docker ps -q -f name=larawater-app); then
   docker stop larawater-app
 fi
 
 # renomeia o contaner com a antepenúltima versão do projeto para ser removida
-if [[ $(docker ps -q -f name=larawater-app-last) ]]; then
+if $(docker ps -q -f name=larawater-app-last); then
   docker rename larawater-app-last larawater-app-removed
 fi
 
 # renomeia o container com a penúltima versão do projeto
-if [[ $(docker ps -q -f name=larawater-app) ]]; then
+if $(docker ps -q -f name=larawater-app); then
   docker rename larawater-app larawater-app-last
 fi
 
@@ -30,6 +30,6 @@ if ! docker run -p 80:80 --name larawater-app larawater ; then
 fi
 
 # remove o container com a antepenúltima versão do projeto
-if [[ $(docker ps -q -f name=larawater-app-removed) ]]; then
+if $(docker ps -q -f name=larawater-app-removed); then
   docker rm larawater-app-removed
 fi
