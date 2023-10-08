@@ -21,9 +21,9 @@ final class UserDrinkRepository
       );
 
       $drink = DB::selectOne(
-        'SELECT user_id, drink_counter FROM user_drink WHERE user_id = :id',
+        'SELECT user_id, drink_counter FROM user_drink WHERE user_id = :user_id ORDER BY id DESC LIMIT 1',
         [
-          'id' => $id
+          'user_id' => $id
         ]
       );
 
