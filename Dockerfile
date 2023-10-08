@@ -40,7 +40,6 @@ RUN apt-get update \
 RUN docker-php-ext-enable opcache
 RUN docker-php-ext-configure gd
 RUN docker-php-ext-install opcache
-RUN docker-php-ext-install apcu
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install gmp
 RUN docker-php-ext-install pdo_mysql
@@ -66,7 +65,6 @@ COPY ./.docker/nginx/prod.conf /etc/nginx/nginx.conf
 
 RUN chgrp -R www-data bootstrap/cache
 RUN chgrp -R www-data storage
-RUN chgrp -R www-data temp
 # RUN chmod 777 ca.pem
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
