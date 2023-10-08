@@ -18,8 +18,6 @@ use Larawater\Module\Register\Infra\Controller\UserRegisterController;
 |
 */
 
-Route::post('/deploy', DeployController::class);
-
 Route::prefix('v1')->group(function () {
 
   /**

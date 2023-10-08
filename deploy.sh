@@ -25,7 +25,7 @@ if [[ $(docker ps -q -f name=larawater-app) ]]; then
 fi
 
 # roda um novo container com a imagem contendo a última versão do projeto
-if [[ ! docker run -d -p 80:80 --name larawater-app larawater ]]; then
+if ! docker run -d -p 80:80 --name larawater-app larawater ; then
   docker start larawater-app-last
 fi
 
