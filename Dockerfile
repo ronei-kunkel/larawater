@@ -37,9 +37,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/pear/
 
-RUN docker-php-ext-enable opcache
 RUN docker-php-ext-configure gd
-RUN docker-php-ext-install opcache
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install gmp
 RUN docker-php-ext-install pdo_mysql
