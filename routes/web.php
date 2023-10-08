@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
   echo('<h1>Doc in development</h1><br><p>Try the collection for now: <a href="https://github.com/ronei-kunkel/larawater/blob/main/collection/larawater.postman_collection.json">Link</a></p>');
 });
+
