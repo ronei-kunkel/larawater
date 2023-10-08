@@ -19,7 +19,10 @@ docker rename larawater-app-last larawater-app-removed
 docker rename larawater-app larawater-app-last
 
 # roda um novo container com a imagem contendo a última versão do projeto
-docker run -p 80:80 --name larawater-app larawater
+docker run -d -p 80:80 --name larawater-app larawater
 
 # remove o container com a antepenúltima versão do projeto
 docker rm larawater-app-removed
+
+# mostra os logs do container
+docker logs -f larawater-app
