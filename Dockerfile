@@ -69,7 +69,7 @@ RUN chgrp -R www-data storage
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer update --working-dir="/var/www/larawater" && composer dump-autoload --working-dir="/var/www/larawater"
+RUN composer install --working-dir="/var/www/larawater" && composer dump-autoload --working-dir="/var/www/larawater"
 
 EXPOSE 80
 
