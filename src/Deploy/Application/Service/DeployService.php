@@ -4,8 +4,8 @@ namespace Larawater\Deploy\Application\Service;
 
 final class DeployService
 {
-  public function run()
+  public function run(): mixed
   {
-    exec('./~/projects/larawater/deploy.sh');
+    return exec('./../deploy.sh');
   }
 }

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # vai para o diretório do projeto
 cd ~/projects/larawater

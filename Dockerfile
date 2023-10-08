@@ -59,6 +59,7 @@ COPY ./.docker/nginx/prod.conf /etc/nginx/nginx.conf
 
 RUN chmod -R 777 bootstrap/cache
 RUN chmod -R 777 storage
+RUN chmod 777 deploy.sh
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
