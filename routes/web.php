@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', function() {
-  echo '1!';
+  echo '2!';
 });
