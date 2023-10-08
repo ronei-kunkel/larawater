@@ -57,13 +57,8 @@ COPY . /var/www/larawater
 COPY ./.docker/php/prod.ini /usr/local/etc/php/local.ini
 COPY ./.docker/nginx/prod.conf /etc/nginx/nginx.conf
 
-# RUN chmod +rwx /var/www/larawater
-
-# RUN chmod -R 777 /var/www/larawater
-
 RUN chmod -R 777 bootstrap/cache
 RUN chmod -R 777 storage
-# RUN chmod 777 ca.pem
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
