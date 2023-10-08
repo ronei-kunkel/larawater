@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Larawater\Common\Infra\Middleware\AuthMiddleware;
+use Larawater\Deploy\Infra\Controller\DeployController;
 use Larawater\Module\Access\Infra\Controller\UserAccessController;
 use Larawater\Module\Drink\Infra\Controller\UserDrinkController;
 use Larawater\Module\Register\Infra\Controller\UserRegisterController;
@@ -16,6 +17,8 @@ use Larawater\Module\Register\Infra\Controller\UserRegisterController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/deploy', DeployController::class);
 
 Route::prefix('v1')->group(function () {
 
