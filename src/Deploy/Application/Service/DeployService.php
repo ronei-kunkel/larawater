@@ -6,6 +6,6 @@ final class DeployService
 {
   public function run(): mixed
   {
-    return exec('./../deploy.sh');
+    return exec('./../deploy.sh'); 
   }
 }
