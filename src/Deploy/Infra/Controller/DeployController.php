@@ -15,6 +15,6 @@ final class DeployController
 
   public function __invoke()
   {
-    $this->service->run();
+    $this->service->run(); 
   }
 }
