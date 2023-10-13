@@ -27,12 +27,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"xpto name\",\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
+					"raw": "{\n    \"name\": \"Xpto Name\",\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
 				},
 				"url": {
-					"raw": "localhost/api/v1/register",
+					"raw": "{{local_url}}/api/v1/register",
 					"host": [
-						"localhost"
+						"{{local_url}}"
 					],
 					"path": [
 						"api",
@@ -64,9 +64,9 @@
 					"raw": "{\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
 				},
 				"url": {
-					"raw": "localhost/api/v1/access",
+					"raw": "{{local_url}}/api/v1/access",
 					"host": [
-						"localhost"
+						"{{local_url}}"
 					],
 					"path": [
 						"api",
@@ -94,7 +94,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJ4cHRvQG1haWwuY29tIn0.Yit3tGX5qGbyvd9ifuN5Sk1Sv-oOXu7W2ZYEzJOwl-E",
 						"type": "text"
 					}
 				],
@@ -103,9 +103,9 @@
 					"raw": "{\n    \"quantity\": 1\n}"
 				},
 				"url": {
-					"raw": "localhost/api/v1/drink",
+					"raw": "{{local_url}}/api/v1/drink",
 					"host": [
-						"localhost"
+						"{{local_url}}"
 					],
 					"path": [
 						"api",
@@ -115,6 +115,36 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "prod_url",
+			"value": "http://143.244.177.128/larawater"
+		},
+		{
+			"key": "local_url",
+			"value": "localhost/larawater"
 		}
 	]
 }
