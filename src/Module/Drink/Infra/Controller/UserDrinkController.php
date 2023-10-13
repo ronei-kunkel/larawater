@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse as Response;
 use Larawater\Module\Drink\Application\Action\UserDrink;
 use Larawater\Module\Drink\Application\Action\UserDrinkInput;
+use Larawater\Module\Register\Application\Exception\UserDrinkException;
 
 final class UserDrinkController
 {
@@ -20,24 +21,24 @@ final class UserDrinkController
   {
     $data = $this->request->all();
 
-    $message = ['status' => 'Error'];
-    $status  = 500;
+    $input = new UserDrinkInput($data['user']['id'], $data['quantity']);
 
-    $input = new UserDrinkInput($data['user']['id'], $data['quantity'] ?? 1);
+    try {
+      $user = $this->action->handle($input);
 
-    $output = $this->action->handle($input);
+      $message = [
+        'user'   => [
+          'id'            => $user->id(),
+          'name'          => $user->name(),
+          'drink_counter' => $user->drinkCounter()
+        ]
+      ];
 
-    if (!$output) return response()->json($message, $status);
+      return response()->json($message, 200);
 
-    $message = [
-      'user'   => [
-        'id'            => $output->id(),
-        'name'          => $output->name(),
-        'drink_counter' => $output->drinkCounter()
-      ]
-    ];
-    $status  = 200;
+    } catch (UserDrinkException $e) {
+      return response()->json(['error' => $e->getMessage()], $e->getCode());
+    }
 
-    return response()->json($message, $status);
   }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse as Response;
 use Larawater\Module\Access\Application\Action\UserAccess;
 use Larawater\Module\Access\Application\Action\UserAccessInput;
+use Larawater\Module\Access\Application\Exception\UserAccessException;
 
 final class UserAccessController
 {
@@ -18,14 +19,18 @@ final class UserAccessController
 
   public function __invoke(): Response
   {
-    $data = $this->request->all();
+    try {
 
-    $input = new UserAccessInput($data['email'], $data['password']);
+      $data = $this->request->all();
 
-    $output = $this->action->handle($input);
+      $input = new UserAccessInput($data['email'], $data['password']);
 
-    if(!$output) return response()->json(['error' => 'Wrong credentials'], 401);
+      $output = $this->action->handle($input);
 
-    return response()->json(['token' => $output->token], 200);
+      return response()->json(['token' => $output->token], 200);
+
+    } catch (UserAccessException $e) {
+      return response()->json(['error' => $e->getMessage()], $e->getCode());
+    }
   }
 }

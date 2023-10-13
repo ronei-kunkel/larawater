@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse as Response;
 use Larawater\Module\Register\Application\Action\UserRegister;
 use Larawater\Module\Register\Application\Action\UserRegisterInput;
+use Larawater\Module\Register\Application\Exception\UserRegisterException;
 
 final class UserRegisterController
 {
@@ -22,11 +23,15 @@ final class UserRegisterController
 
     $input = new UserRegisterInput($data['name'], $data['email'], $data['password']);
 
-    $output = $this->action->handle($input);
+    try {
 
-    $message = $output ? null : ['status' => 'Error'];
-    $status  = $output ? 200 : 500;
+      $user = $this->action->handle($input);
 
-    return response()->json($message, $status);
+      return response()->json(['registered' => $user->registered], 201);
+
+    } catch (UserRegisterException $e) {
+      return response()->json(['error' => $e->getMessage()], $e->getCode());
+    }
+
   }
 }
