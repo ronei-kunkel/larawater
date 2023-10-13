@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Larawater\Module\Drink\Domain\Entity;
+use Larawater\Module\Register\Domain\Exception\DrinkException;
 
 final class User
 {
@@ -26,8 +27,14 @@ final class User
     return $this->drinkCounter;
   }
 
+  /**
+   * @throws DrinkException
+   */
   public function drink(int $drinks = 1): void
   {
-    if ($drinks > 0) $this->drinkCounter += $drinks;
+    if ($drinks <= 0)
+      throw DrinkException::onlyPositiveDrinksAllowed();
+
+    $this->drinkCounter += $drinks;
   }
 }

@@ -20,7 +20,7 @@ final class UserAccessRepository
         ]
       );
 
-      return ($userData) ? new User($userData->id, $email, $userData->password) : false;
+      return ($userData) ? new User($userData->id, $email, $userData->password) : null;
     } catch (Throwable $th) {
       return null;
     }

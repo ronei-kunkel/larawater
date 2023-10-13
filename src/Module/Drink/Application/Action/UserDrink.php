@@ -4,6 +4,8 @@ namespace Larawater\Module\Drink\Application\Action;
 
 use Larawater\Module\Drink\Domain\Entity\User;
 use Larawater\Module\Drink\Infra\Repository\UserDrinkRepository;
+use Larawater\Module\Register\Application\Exception\UserDrinkException;
+use Larawater\Module\Register\Domain\Exception\DrinkException;
 
 final class UserDrink
 {
@@ -12,15 +14,26 @@ final class UserDrink
   ) {
   }
 
-  public function handle(UserDrinkInput $input): false|User
+  /**
+   * @throws UserDrinkException
+   */
+  public function handle(UserDrinkInput $input): User
   {
     $user = $this->repository->getById($input->userId);
 
-    if(!$user) return false;
+    if(!$user)
+      throw UserDrinkException::userNotFound();
 
-    $user->drink($input->quantity);
+    try {
 
-    if(!$this->repository->update($user)) return false;
+      $user->drink($input->quantity);
+
+    } catch (DrinkException $e) {
+      throw UserDrinkException::drinkException($e->getMessage());
+    }
+
+    if(!$this->repository->update($user))
+      throw UserDrinkException::cannotUpdateUserDrinkCounter();
 
     return $user;
   }

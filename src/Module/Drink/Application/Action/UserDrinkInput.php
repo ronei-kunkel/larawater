@@ -6,7 +6,7 @@ final readonly class UserDrinkInput
 {
   public function __construct(
     public int $userId,
-    public int $quantity
+    public ?int $quantity
   ) {
   }
 }

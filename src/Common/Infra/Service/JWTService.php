@@ -4,30 +4,66 @@ namespace Larawater\Common\Infra\Service;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Larawater\Common\Infra\Exception\EnvException;
+use Larawater\Common\Infra\Exception\JWTException;
 use stdClass;
+use Throwable;
 
 final class JWTService
 {
-  private const JWTKEY = 'JWTKEY';
 
-  public function encode(int $userId, string $userEmail): string
-  {
-    return JWT::encode(
-      [
-        'id' => $userId,
-        'email' => $userEmail
-      ],
-      self::JWTKEY,
-      'HS256'
-    );
+  private const ENV_VAR = 'JWT_KEY';
+
+  private const ALG = 'HS256';
+
+  public function __construct(
+    private EnvService $envService
+  ) {
   }
 
-  public function decode(string $jwt): false|stdClass
+  /**
+   * @throws EnvException
+   */
+  private function key(): string
   {
+    return $this->envService->get(self::ENV_VAR);
+  }
+
+  /**
+   * @throws JWTException
+   */
+  public function encode(int $userId, string $userEmail): string
+  {
+    $payload = [
+      'id'    => $userId,
+      'email' => $userEmail
+    ];
+
     try {
-      return JWT::decode($jwt, new Key(self::JWTKEY, 'HS256'));
-    } catch (\Throwable $th) {
-      return false;
+
+      return JWT::encode($payload, $this->key(), self::ALG);
+
+    } catch (EnvException $e) {
+      throw JWTException::tokenCannotGenerate();
+    }
+  }
+
+  /**
+   * @throws JWTException
+   */
+  public function decode(string $jwt): stdClass
+  {
+
+    $jwt = str_replace("Bearer ", "", $jwt);
+
+    try {
+
+      return JWT::decode($jwt, new Key($this->key(), self::ALG));
+
+    } catch (EnvException $e) {
+      throw JWTException::tokenCannotDecoded();
+    } catch (Throwable $th) {
+      throw JWTException::temporaryGenericJWTException($th->getMessage());
     }
   }
 }
