@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Register\Domain\Exception;
+namespace Larawater\Module\Drink\Domain\Exception;
 
 use DomainException;
 

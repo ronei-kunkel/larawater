@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Register\Application\Exception;
+namespace Larawater\Module\Drink\Application\Exception;
 
 use Exception;
 
