@@ -15,7 +15,7 @@ final class UserRegisterException extends Exception
   }
 
   public static function userNotCreated() {
-    return new self('User cannot created.', 500);
+    return new self('User cannot created', 500);
   }
 
 }

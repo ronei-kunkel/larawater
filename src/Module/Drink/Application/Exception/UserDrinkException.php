@@ -11,7 +11,7 @@ final class UserDrinkException extends Exception
   }
 
   public static function userNotFound() {
-    return new self('User not found.', 404);
+    return new self('User not found', 404);
   }
 
   public static function cannotUpdateUserDrinkCounter() {

@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace Larawater\Module\Drink\Domain\Entity;
-use Larawater\Module\Register\Domain\Exception\DrinkException;
+
+use Larawater\Module\Drink\Domain\Exception\DrinkException;
 
 final class User
 {

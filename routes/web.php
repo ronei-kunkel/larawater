@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Larawater\Documentation\Infra\Controller\ShowDocumentationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  echo('<h1>Doc in development </h1><br><p>Try the collection for now: <a href="https://github.com/ronei-kunkel/larawater/blob/main/collection/larawater.postman_collection.json">Link</a></p>');
-});
+Route::redirect('/', '/documentation/v1');
 
+Route::get('documentation/{version}', ShowDocumentationController::class);

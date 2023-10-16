@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse as Response;
 use Larawater\Module\Drink\Application\Action\UserDrink;
 use Larawater\Module\Drink\Application\Action\UserDrinkInput;
-use Larawater\Module\Register\Application\Exception\UserDrinkException;
+use Larawater\Module\Drink\Application\Exception\UserDrinkException;
 
 final class UserDrinkController
 {

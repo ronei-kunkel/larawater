@@ -25,9 +25,9 @@ final class UserRegisterController
 
     try {
 
-      $user = $this->action->handle($input);
+      $this->action->handle($input);
 
-      return response()->json(['registered' => $user->registered], 201);
+      return response()->json(['message' => 'Created'], 201);
 
     } catch (UserRegisterException $e) {
       return response()->json(['error' => $e->getMessage()], $e->getCode());
