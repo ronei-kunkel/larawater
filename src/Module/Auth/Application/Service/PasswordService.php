@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Access\Application\Service;
+namespace Larawater\Module\Auth\Application\Service;
 
 final class PasswordService
 {

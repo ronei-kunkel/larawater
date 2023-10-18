@@ -3,7 +3,7 @@
 namespace Larawater\Module\Register\Infra\Controller;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse as Response;
+use Illuminate\Http\JsonResponse;
 use Larawater\Module\Register\Application\Action\UserRegister;
 use Larawater\Module\Register\Application\Action\UserRegisterInput;
 use Larawater\Module\Register\Application\Exception\UserRegisterException;
@@ -17,7 +17,7 @@ final class UserRegisterController
   ) {
   }
 
-  public function __invoke(): Response
+  public function __invoke(): JsonResponse
   {
     $data = $this->request->all();
 
@@ -25,12 +25,12 @@ final class UserRegisterController
 
     try {
 
-      $user = $this->action->handle($input);
+      $this->action->handle($input);
 
-      return response()->json(['registered' => $user->registered], 201);
+      return new JsonResponse(['message' => 'Created'], 201);
 
     } catch (UserRegisterException $e) {
-      return response()->json(['error' => $e->getMessage()], $e->getCode());
+      return new JsonResponse(['error' => $e->getMessage()], $e->getCode());
     }
 
   }

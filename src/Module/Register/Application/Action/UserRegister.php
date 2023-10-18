@@ -36,6 +36,6 @@ final class UserRegister
     if(!$registered)
       throw UserRegisterException::userNotCreated();
 
-    return new UserRegisterOutput($registered);
+    return new UserRegisterOutput();
   }
 }

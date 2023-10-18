@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Access\Infra\Repository;
+namespace Larawater\Module\Auth\Infra\Repository;
 
 use Illuminate\Support\Facades\DB;
-use Larawater\Module\Access\Domain\Entity\User;
+use Larawater\Module\Auth\Domain\Entity\User;
 use Larawater\Common\Domain\Type\Email;
 use Throwable;
 
-final class UserAccessRepository
+final class UserAuthRepository
 {
   public function getByEmail(Email $email): ?User
   {

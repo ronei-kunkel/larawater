@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Larawater\Common\Infra\Middleware\AuthMiddleware;
-use Larawater\Deploy\Infra\Controller\DeployController;
-use Larawater\Module\Access\Infra\Controller\UserAccessController;
+use Larawater\Documentation\Infra\Controller\RawDocumentationController;
+use Larawater\Module\Auth\Infra\Controller\UserAuthController;
 use Larawater\Module\Drink\Infra\Controller\UserDrinkController;
 use Larawater\Module\Register\Infra\Controller\UserRegisterController;
 
@@ -18,37 +18,47 @@ use Larawater\Module\Register\Infra\Controller\UserRegisterController;
 |
 */
 
+Route::get('documentation/{version}', RawDocumentationController::class);
+
 Route::prefix('v1')->group(function () {
 
   /**
-   * 200 - {}
-   * 500 - {"status": "Error"}
+   * 200 - {"token": "Bearer xxx.xxx.xxx"}
+   * 400 - {"error": "The email 'xxx@xxx.com' has an invalid format"}
+   * 401 - {"error": "Wrong credentials. Try again or create an account instead if you don't have one"}
+   * 500 - {"error": "Token cannot generate now. Try again later"}
    */
-  Route::post('/register', UserRegisterController::class);
+  Route::post('/auth', UserAuthController::class);
 
-  /**
-   * 200 - {"token": :jwt}
-   * 401 - {"error": "Wrong credentials"}
-   */
-  Route::post('/access', UserAccessController::class);
-
-  Route::middleware(AuthMiddleware::class)->group(function () {
+  Route::prefix('user')->group(function () {
 
     /**
-     * 200 - {
-     *   "user": {
-     *       "id": :id,
-     *       "name": :name,
-     *       "drink_counter": :counter
-     *     }
-     *   }
-     * 
-     * 400 - {"error": "Missing 'Authorization' header"}
-     *
-     * 401 - {"error": "Invalid token"}
-     *
-     * 500 - {"status": "Error"}
+     * 201 - {"message": "Created"}
+     * 400 - {"error: "The email value \'{value}\' has an invalid format"}
+     * 400 - {"error: "Generic temporary error for password"}
+     * 500 - {"error: "User cannot created"}
      */
-    Route::post('/drink', UserDrinkController::class);
+    Route::post('/', UserRegisterController::class);
+
+    /**
+     * 400 - {"error": "Missing 'Authorization' header"}
+     * 401 - {"error": "Invalid token"}
+     */
+    Route::middleware([AuthMiddleware::class])->group(function () {
+
+      /**
+       * 200 - {
+       *   "user": {
+       *       "id": xxx,
+       *       "name": "xxx",
+       *       "drink_counter": xxx
+       *     }
+       *   }
+       * 400 - {"error": "Only positive drinks are allowed"}
+       * 404 - {"error": "User not found"}
+       * 500 - {"error": "Cannot update user drink counter"}
+       */
+      Route::post('/drink', UserDrinkController::class);
+    });
   });
 });

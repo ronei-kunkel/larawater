@@ -2,11 +2,10 @@
 
 namespace Larawater\Module\Drink\Application\Action;
 
+use Larawater\Module\Drink\Application\Exception\UserDrinkException;
 use Larawater\Module\Drink\Domain\Entity\User;
+use Larawater\Module\Drink\Domain\Exception\DrinkException;
 use Larawater\Module\Drink\Infra\Repository\UserDrinkRepository;
-use Larawater\Module\Register\Application\Exception\UserDrinkException;
-use Larawater\Module\Register\Domain\Exception\DrinkException;
-
 final class UserDrink
 {
   public function __construct(

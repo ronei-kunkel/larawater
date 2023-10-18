@@ -7,7 +7,7 @@ use DomainException;
 final class EmailException extends DomainException
 {
   public static function invalidFormat(string $value) {
-    $message = sprintf('The value \'%s\' has ain invalid email format', $value);
+    $message = sprintf('The email value \'%s\' has an invalid format', $value);
 
     return new self($message);
   }

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Access\Application\Action;
+namespace Larawater\Module\Auth\Application\Action;
 
-final readonly class UserAccessOutput
+final readonly class UserAuthOutput
 {
   public function __construct(
     public string $token
