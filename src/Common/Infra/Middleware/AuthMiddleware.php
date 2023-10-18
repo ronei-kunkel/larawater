@@ -3,6 +3,7 @@
 namespace Larawater\Common\Infra\Middleware;
 
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Larawater\Common\Infra\Exception\JWTException;
 use Larawater\Common\Infra\Service\JWTService;
@@ -19,7 +20,7 @@ final class AuthMiddleware
   {
     $jwt = $request->hasHeader('Authorization') ? $request->header('Authorization') : null;
 
-    if (!$jwt) return response()->json(['error' => "Missing 'Authorization' header"], 400);
+    if (!$jwt) return new JsonResponse(['error' => "Missing 'Authorization' header"], 400);
 
     try {
       $user = $this->jWTService->decode($jwt);
@@ -34,7 +35,7 @@ final class AuthMiddleware
       return $next($request);
 
     } catch (JWTException $e) {
-      return response()->json(['error' => $e->getMessage()], $e->getCode());
+      return new JsonResponse(['error' => $e->getMessage()], $e->getCode());
     }
 
   }

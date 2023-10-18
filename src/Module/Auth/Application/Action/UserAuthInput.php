@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Authorize\Application\Action;
+namespace Larawater\Module\Auth\Application\Action;
 
-final readonly class UserAuthorizeInput
+final readonly class UserAuthInput
 {
   public function __construct(
     public string $email,

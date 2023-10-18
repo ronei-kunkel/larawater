@@ -3,7 +3,7 @@
 namespace Larawater\Module\Drink\Infra\Controller;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse as Response;
+use Illuminate\Http\JsonResponse;
 use Larawater\Module\Drink\Application\Action\UserDrink;
 use Larawater\Module\Drink\Application\Action\UserDrinkInput;
 use Larawater\Module\Drink\Application\Exception\UserDrinkException;
@@ -17,7 +17,7 @@ final class UserDrinkController
   ) {
   }
 
-  public function __invoke(): Response
+  public function __invoke(): JsonResponse
   {
     $data = $this->request->all();
 
@@ -34,10 +34,10 @@ final class UserDrinkController
         ]
       ];
 
-      return response()->json($message, 200);
+      return new JsonResponse($message, 200);
 
     } catch (UserDrinkException $e) {
-      return response()->json(['error' => $e->getMessage()], $e->getCode());
+      return new JsonResponse(['error' => $e->getMessage()], $e->getCode());
     }
 
   }

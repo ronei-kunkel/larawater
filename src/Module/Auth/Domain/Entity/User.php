@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Authorize\Domain\Entity;
+namespace Larawater\Module\Auth\Domain\Entity;
 
 use Larawater\Common\Domain\Type\Email;
 

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Larawater\Module\Authorize\Application\Exception;
+namespace Larawater\Module\Auth\Application\Exception;
 
 use Exception;
 
-final class UserAuthorizeException extends Exception
+final class UserAuthException extends Exception
 {
   public static function invalidEmailFormat(string $email) {
     $message = sprintf('The email \'%s\' has an invalid format', $email);

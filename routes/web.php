@@ -14,6 +14,9 @@ use Larawater\Documentation\Infra\Controller\ShowDocumentationController;
 |
 */
 
-Route::redirect('/', '/documentation/v1');
+Route::redirect('', 'documentation/v1');
+
+// Route::redirect('', 'documentation');
+// Route::get('documentation', ShowDocumentationController::class);
 
 Route::get('documentation/{version}', ShowDocumentationController::class);

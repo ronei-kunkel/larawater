@@ -7,114 +7,140 @@
 	},
 	"item": [
 		{
-			"name": "UserRegister",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Xpto Name\",\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
-				},
-				"url": {
-					"raw": "{{local_url}}/api/v1/register",
-					"host": [
-						"{{local_url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"register"
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "auth",
+							"item": [
+								{
+									"name": "Generate JWT",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
+										},
+										"url": {
+											"raw": "{{local_url}}/api/v1/auth",
+											"host": [
+												"{{local_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"auth"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "drink",
+									"item": [
+										{
+											"name": "Increment Drink Counter",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Authorization",
+														"value": "Bearer xxx.xxx.xxx",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"quantity\": 1\n}"
+												},
+												"url": {
+													"raw": "{{local_url}}/api/v1/user/drink",
+													"host": [
+														"{{local_url}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"drink"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Register User",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Xpto Name\",\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
+										},
+										"url": {
+											"raw": "{{local_url}}/api/v1/user",
+											"host": [
+												"{{local_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "UserAuthorize",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"xpto@mail.com\",\n    \"password\": \"123456\"\n}"
-				},
-				"url": {
-					"raw": "{{local_url}}/api/v1/access",
-					"host": [
-						"{{local_url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"access"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UserDrink",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJ4cHRvQG1haWwuY29tIn0.Yit3tGX5qGbyvd9ifuN5Sk1Sv-oOXu7W2ZYEzJOwl-E",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"quantity\": 1\n}"
-				},
-				"url": {
-					"raw": "{{local_url}}/api/v1/drink",
-					"host": [
-						"{{local_url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"drink"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	],
 	"event": [

@@ -3,6 +3,7 @@
 namespace Larawater\Documentation\Infra\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Larawater\Documentation\Application\Action\ShowDocumentation;
 
 final class ShowDocumentationController
@@ -13,10 +14,10 @@ final class ShowDocumentationController
   ) {
   }
 
-  public function __invoke(string $version = '')
+  public function __invoke(string $version = ''): Response
   {
     $output = $this->action->handle($version);
 
-    return response($output);
+    return new Response($output);
   }
 }
