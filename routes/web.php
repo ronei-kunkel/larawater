@@ -8,13 +8,17 @@ use Larawater\Documentation\Infra\Controller\ShowDocumentationController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| WHEN HAVE REDIRECT, NEED TO SET THE PROJECT PATH
+| BECAUSE THE REQUEST FROM SERVER, THEN NEED TO SPECIFICATE THE TARGET
+|
+| ITS NEEDED BECAUSE THE ARCHITECTURE OF INFRA (MULTIPLE PROJECTS SEGREGATED IN SUBFOLDERS)
+|
+| Route::redirect('', '/larawater');
 |
 */
 
-Route::redirect('/', 'documentation/v1');
+Route::redirect('', '/larawater/documentation/v1');
+
 
 // Route::redirect('', 'documentation');
 // Route::get('documentation', ShowDocumentationController::class);
