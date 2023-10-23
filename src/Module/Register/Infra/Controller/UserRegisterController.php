@@ -27,7 +27,7 @@ final class UserRegisterController
 
       $this->action->handle($input);
 
-      return new JsonResponse(['message' => 'Created'], 201);
+      return new JsonResponse(null, 201);
 
     } catch (UserRegisterException $e) {
       return new JsonResponse(['error' => $e->getMessage()], $e->getCode());

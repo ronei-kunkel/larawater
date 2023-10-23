@@ -10,7 +10,7 @@ final class UserRegisterRepository
 {
   public function create(User $user): bool
   {
-    try{
+    try {
       DB::transaction(function () use ($user) {
         DB::insert(
           'INSERT INTO user SET name = :name, email = :email, password = :password',
@@ -25,5 +25,12 @@ final class UserRegisterRepository
     } catch (Throwable $th) {
       return false;
     }
+  }
+
+  public function getIdByEmail(string $email): ?int
+  {
+    $user = DB::selectOne('SELECT id FROM user WHERE email = :email',['email' => $email]);
+
+    return $user->id ?? null;
   }
 }

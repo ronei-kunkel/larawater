@@ -6,13 +6,15 @@ use Larawater\Common\Domain\Exception\EmailException;
 use Larawater\Common\Domain\Exception\PasswordException;
 use Larawater\Module\Register\Application\Action\UserRegisterOutput;
 use Larawater\Module\Register\Application\Exception\UserRegisterException;
+use Larawater\Module\Register\Application\Service\UserRegisterService;
 use Larawater\Module\Register\Domain\Entity\User;
 use Larawater\Module\Register\Infra\Repository\UserRegisterRepository;
 
 final class UserRegister
 {
   public function __construct(
-    private UserRegisterRepository $repository
+    private UserRegisterRepository $repository,
+    private UserRegisterService $service
   ) {
   }
 
@@ -21,6 +23,10 @@ final class UserRegister
    */
   public function handle(UserRegisterInput $input): UserRegisterOutput
   {
+
+    if($this->service->checkDuplicateEmail($input->email))
+      throw UserRegisterException::emailAlredyInUse();
+
     try {
 
       $user = User::build($input->name, $input->email, $input->password);
