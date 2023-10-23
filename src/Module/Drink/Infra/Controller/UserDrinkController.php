@@ -21,7 +21,7 @@ final class UserDrinkController
   {
     $data = $this->request->all();
 
-    $input = new UserDrinkInput($data['user']['id'], $data['quantity'] ?? 1);
+    $input = new UserDrinkInput($data['user']['id'] ?? 0, $data['quantity'] ?? 1);
 
     try {
       $user = $this->action->handle($input);

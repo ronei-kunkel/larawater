@@ -23,7 +23,7 @@ final class UserAuthController
 
       $data = $this->request->all();
 
-      $input = new UserAuthInput($data['email'], $data['password']);
+      $input = new UserAuthInput($data['email'] ?? '', $data['password'] ?? '');
 
       $output = $this->action->handle($input);
 

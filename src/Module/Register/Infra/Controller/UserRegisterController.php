@@ -21,7 +21,7 @@ final class UserRegisterController
   {
     $data = $this->request->all();
 
-    $input = new UserRegisterInput($data['name'], $data['email'], $data['password']);
+    $input = new UserRegisterInput($data['name'] ?? '', $data['email'] ?? '', $data['password'] ?? '');
 
     try {
 
