@@ -6,13 +6,15 @@ use Exception;
 
 final class EnvException extends Exception
 {
-  public static function varNotExist(string $var) {
+  public static function varNotExist(string $var): self
+  {
     $message = sprintf('The env var \'%s\' not exist.', $var);
 
     return new self($message);
   }
 
-  public static function varIsNull(string $var) {
+  public static function varIsNull(string $var): self
+  {
     $message = sprintf('The env var \'%s\' is null.', $var);
 
     return new self($message);

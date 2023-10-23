@@ -63,7 +63,7 @@ final class JWTService
     } catch (EnvException $e) {
       throw JWTException::tokenCannotDecoded();
     } catch (Throwable $th) {
-      throw JWTException::temporaryGenericJWTException($th->getMessage());
+      throw JWTException::specialException($th->getMessage());
     }
   }
 }

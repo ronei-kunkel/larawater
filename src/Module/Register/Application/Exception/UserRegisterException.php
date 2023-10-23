@@ -6,15 +6,23 @@ use Exception;
 
 final class UserRegisterException extends Exception
 {
-  public static function emailException(string $message) {
+  public static function emailException(string $message): self
+  {
     return new self($message, 400);
   }
 
-  public static function passwordException(string $message) {
+  public static function passwordException(string $message): self
+  {
     return new self($message, 400);
   }
 
-  public static function userNotCreated() {
+  public static function emailAlredyInUse(): self
+  {
+    return new self('The email are already in use', 409);
+  }
+
+  public static function userNotCreated(): self
+  {
     return new self('User cannot created', 500);
   }
 

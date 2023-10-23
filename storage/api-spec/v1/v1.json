@@ -126,6 +126,16 @@
               }
             }
           },
+          "409": {
+            "description": "Client side error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Server side error",
             "content": {
